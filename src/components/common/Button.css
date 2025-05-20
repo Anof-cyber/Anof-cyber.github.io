@@ -1,0 +1,65 @@
+/* Button.css */
+.custom-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.8rem 1.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: inline-block;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-button:hover {
+  background-color: #2563eb; /* Darker shade of primary color */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.custom-button:active {
+  transform: translateY(0);
+}
+
+.custom-button.outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.custom-button.outline:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.custom-button.accent {
+  background-color: var(--accent-color);
+}
+
+.custom-button.accent:hover {
+  background-color: #e63946; /* Darker shade of accent color */
+}
+
+.custom-button.large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.custom-button.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.custom-button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.custom-button:disabled:hover {
+  transform: none;
+}

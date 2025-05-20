@@ -1,0 +1,57 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to publish branch
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+
+          # Create and switch to a new orphan branch
+          git checkout --orphan publish
+
+          # Remove all files from staging
+          git rm -rf .
+
+          # Move build files to root
+          mv dist/* .
+          rmdir dist
+
+          # Add all files in the build directory
+          git add .
+
+          # Create commit
+          git commit -m "Build for publishing [skip ci]"
+
+          # Force push to publish branch
+          git push origin publish --force

@@ -1,0 +1,60 @@
+:root {
+  /* Main Colors - Cyberpunk Theme */
+  --primary-color: #0DFF85; /* Bright neon green */
+  --secondary-color: #fc036b; /* Hot magenta */
+  --accent-color: #5918df; /* Electric purple */
+  --tertiary-color: #00f0ff; /* Bright cyan */
+
+  /* Text Colors */
+  --text-color: #FFFFFF; /* Pure white for readability */
+  --text-secondary: #9CCDDC; /* Light blue-ish for secondary text */
+  --heading-color: #FFFFFF; /* Pure white for headings */
+
+  /* Background Colors */
+  --background-dark: #050510; /* Almost black with hint of blue */
+  --background-card: #0a0a20; /* Very dark blue-black for cards */
+  --background-light: #101032; /* Dark blue for lighter elements */
+  --background-gradient: linear-gradient(135deg, rgba(13,255,133,0.1) 0%, rgba(89,24,223,0.15) 100%);
+
+  /* UI Elements */
+  --border-radius: 4px; /* Sharper edges for cyber look */
+  --border-radius-lg: 8px;
+  --border-color: rgba(13, 255, 133, 0.2);
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  --glow-green: 0 0 15px rgba(13, 255, 133, 0.7);
+  --glow-magenta: 0 0 15px rgba(252, 3, 107, 0.7);
+  --glow-purple: 0 0 15px rgba(89, 24, 223, 0.7);
+  --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.7);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+  --gradient-accent: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  --gradient-dark: linear-gradient(135deg, rgba(10,10,32,0.8), rgba(5,5,16,0.95));
+  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+
+  /* Animation */
+  --transition-fast: all 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --transition-medium: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  /* Typography */
+  --font-family: 'Rajdhani', 'Poppins', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-family-heading: 'Orbitron', 'Montserrat', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+
+  /* Grid */
+  --container-width: 1200px;
+  --container-padding: 1.5rem;
+
+  /* HUD Elements */
+  --hud-color: var(--primary-color);
+  --hud-border: 1px solid rgba(13, 255, 133, 0.3);
+  --hud-shadow: 0 0 10px rgba(13, 255, 133, 0.3);
+}
