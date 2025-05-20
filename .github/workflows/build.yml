@@ -35,19 +35,21 @@ jobs:
       - name: Deploy to publish branch
         run: |
           git config --global user.name github-actions
-          git config --global user.email github-actions@github.com
+          git config --global user.email github-actions@github.com          # Create a temporary directory for build files
+          mkdir temp_build
+          cp -r dist/* temp_build/
 
           # Create and switch to a new orphan branch
           git checkout --orphan publish
 
-          # Remove all files from staging
+          # Remove everything
           git rm -rf .
 
-          # Move build files to root
-          mv dist/* .
-          rmdir dist
+          # Copy build files back
+          cp -r temp_build/* .
+          rm -rf temp_build
 
-          # Add all files in the build directory
+          # Add only the build files
           git add .
 
           # Create commit
