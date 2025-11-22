@@ -124,6 +124,20 @@ export const skillsData: SkillCategory[] = [
         description: "Frontend development, browser extensions, and security automation scripts."
       },
       {
+        id: 107,
+        name: "Swift",
+        proficiency: 65,
+        level: "advanced",
+        description: "iOS and macOS application development and security assessment of Swift-based mobile applications."
+      },
+      {
+        id: 108,
+        name: "C#",
+        proficiency: 65,
+        level: "advanced",
+        description: ".NET application development and security testing of Windows and cross platform desktop applications."
+      },
+      {
         id: 105,
         name: "Bash",
         proficiency: 70,

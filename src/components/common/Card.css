@@ -17,19 +17,7 @@
 }
 
 .card-accent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 4px;
-  background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
-  border-radius: 2px 0 0 2px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card:hover .card-accent {
-  opacity: 1;
+  display: none;
 }
 
 .card-image {

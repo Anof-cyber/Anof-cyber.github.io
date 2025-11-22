@@ -6,16 +6,16 @@
   z-index: 1000;
   padding: 1rem 0;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  background-color: rgba(11, 16, 30, 0.4);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(13, 245, 227, 0.1);
+  background-color: var(--background-dark);
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header.scrolled {
-  background-color: rgba(11, 16, 30, 0.95);
+  background-color: var(--background-dark);
   padding: 0.7rem 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(13, 245, 227, 0.2);
+  box-shadow: var(--box-shadow);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-content {
@@ -44,12 +44,8 @@
 
 .logo-glitch {
   font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-color);
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  color: var(--primary-color);
   padding: 0.2rem;
   position: relative;
   font-family: var(--font-family-mono);
@@ -58,39 +54,13 @@
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  border: 2px solid var(--primary-color);
-  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
 }
 
 .logo-glitch::before,
 .logo-glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-glitch::before {
-  left: 2px;
-  text-shadow: -2px 0 var(--primary-color);
-  animation: glitch 3s infinite linear alternate-reverse;
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-}
-
-.logo-glitch::after {
-  left: -2px;
-  text-shadow: 2px 0 var(--accent-color);
-  animation: glitch 2s infinite linear alternate-reverse;
-  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  display: none;
 }
 
 .logo-text {
@@ -142,9 +112,9 @@
   position: absolute;
   bottom: -2px;
   left: 0;
-  height: 2px;
+  height: 1px;
   width: 0;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  background: var(--primary-color);
   transition: var(--transition-medium);
 }
 
@@ -203,23 +173,30 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  padding: 0.75rem 1.7rem;
   border-radius: var(--border-radius);
-  background-color: transparent;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
   border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  transition: var(--transition-medium);
+  color: var(--background-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 2rem;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
 }
 
 .nav-cta:hover {
-  background-color: var(--primary-color);
-  color: var(--background-dark);
+  background: transparent;
+  color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.04);
+  transform: translateX(2px);
 }
 
 .nav-cta i {
   transition: transform 0.3s ease;
+  font-size: 0.85rem;
 }
 
 .nav-cta:hover i {
@@ -250,24 +227,12 @@
     transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
     z-index: 1050;
     overflow-y: auto;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
-    border-left: 1px solid rgba(13, 245, 227, 0.1);
+    box-shadow: var(--box-shadow);
+    border-left: 1px solid var(--border-color);
   }
 
   .navbar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-      radial-gradient(rgba(13, 245, 227, 0.03) 2px, transparent 2px),
-      radial-gradient(rgba(255, 92, 0, 0.02) 2px, transparent 2px);
-    background-size: 20px 20px, 15px 15px;
-    background-position: 0 0, 10px 10px;
-    z-index: -1;
-    opacity: 0.3;
+    display: none;
   }
 
   .navbar.open {

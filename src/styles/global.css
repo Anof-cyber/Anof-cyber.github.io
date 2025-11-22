@@ -43,16 +43,6 @@ h2 {
   position: relative;
 }
 
-h2::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-  margin-top: 0.8rem;
-  border-radius: 2px;
-}
-
 h3 {
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
@@ -75,7 +65,7 @@ a {
 }
 
 a:hover {
-  color: var(--accent-color);
+  opacity: 0.7;
 }
 
 /* Container */
@@ -98,50 +88,36 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-color);
-  background-color: var(--background-card);
-  border: 2px solid var(--primary-color);
+  gap: 0.5rem;
+  padding: 0.95rem 2.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--background-dark);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
+  border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: var(--transition-medium);
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  z-index: -1;
-  transition: var(--transition-medium);
-  opacity: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
 .button:hover {
-  color: var(--heading-color);
-  transform: translateY(-3px);
-  box-shadow: var(--glow-cyan);
-}
-
-.button:hover::before {
-  opacity: 1;
+  background: transparent;
+  color: var(--primary-color);
+  transform: translateX(2px);
 }
 
 .button-outline {
   background-color: transparent;
   color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .button-outline:hover {
+  background-color: var(--primary-color);
   color: var(--background-dark);
 }
 
@@ -154,30 +130,11 @@ section {
   transition: var(--transition-medium);
   border: 1px solid var(--border-color);
   position: relative;
-  overflow: hidden;
   height: 100%;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: var(--transition-medium);
-}
-
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.card:hover::before {
-  transform: scaleX(1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Code elements */
@@ -269,10 +226,7 @@ pre {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary-color);
   display: inline-block;
 }
 
