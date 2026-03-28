@@ -1,100 +1,128 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { projectsData } from '../../data/projectsData';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import './Projects.css';
 
-interface ProjectFilterProps {
-  filters: string[];
-  activeFilter: string;
-  onFilterChange: (filter: string) => void;
-}
+const ALL = 'All';
 
-const ProjectFilter: React.FC<ProjectFilterProps> = ({ filters, activeFilter, onFilterChange }) => {
-  return (
-    <div className="project-filter">
-      {filters.map((filter, index) => (
-        <button
-          key={index}
-          className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
-          onClick={() => onFilterChange(filter)}
-        >
-          {filter}
-        </button>
-      ))}
-    </div>
-  );
+/** 3-D tilt + cursor spotlight on a card */
+const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const x  = e.clientX - rect.left;
+  const y  = e.clientY - rect.top;
+  const cx = rect.width  / 2;
+  const cy = rect.height / 2;
+  const rotX = ((y - cy) / cy) * -8;   // max ±8°
+  const rotY = ((x - cx) / cx) *  8;
+  card.style.transform = `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(6px)`;
+  card.style.setProperty('--mx', `${(x / rect.width)  * 100}%`);
+  card.style.setProperty('--my', `${(y / rect.height) * 100}%`);
+};
+
+const handleTiltReset = (e: React.MouseEvent<HTMLDivElement>) => {
+  e.currentTarget.style.transform = '';
 };
 
 const Projects: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [animated, setAnimated] = useState(false);
+  const categories = [ALL, ...Array.from(new Set(projectsData.map((p) => p.category)))];
+  const [active, setActive] = useState(ALL);
 
-  useEffect(() => {
-    setAnimated(true);
+  useScrollReveal('.projects-section .reveal');
 
-    const resetAnimation = () => {
-      setAnimated(false);
-      setTimeout(() => setAnimated(true), 50);
-    };
+  const filtered = active === ALL ? projectsData : projectsData.filter((p) => p.category === active);
+  const showFeatured = active === ALL;
 
-    resetAnimation();
-  }, [activeFilter]);
-
-  const projectCategories = ['All', 'Security Tools', 'Burp Suite Extensions','Mobile Security', 'Training'];
-
-  const filteredProjects = activeFilter === 'All'
-    ? projectsData
-    : projectsData.filter(project => project.category === activeFilter);
+  /** Reusable card renderer */
+  const renderCard = (proj: typeof projectsData[0], featured = false) => (
+    <div
+      key={proj.id}
+      className={`proj__card${featured ? ' proj__card--featured' : ' proj__card--visible'}`}
+      onMouseMove={handleTilt}
+      onMouseLeave={handleTiltReset}
+    >
+      <div className="proj__card-top">
+        <div className="proj__card-header">
+          <div className={`proj__folder-icon${featured ? ' proj__folder-icon--lg' : ''}`}>
+            <i className="fas fa-folder-open" aria-hidden="true" />
+          </div>
+          <div className="proj__card-links">
+            <a href={proj.link} target="_blank" rel="noopener noreferrer"
+              className="proj__link-btn" aria-label={`View ${proj.title} on GitHub`}>
+              <i className="fab fa-github" aria-hidden="true" />
+            </a>
+            {proj.demo && (
+              <a href={proj.demo} target="_blank" rel="noopener noreferrer"
+                className="proj__link-btn" aria-label={`Live demo of ${proj.title}`}>
+                <i className="fas fa-external-link-alt" aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        </div>
+        {featured && <span className="proj__featured-label mono">Featured</span>}
+        <h3 className={`proj__title${featured ? ' proj__title--lg' : ''}`}>{proj.title}</h3>
+        <p className={`proj__desc${featured ? ' proj__desc--lg' : ''}`}>{proj.description}</p>
+      </div>
+      <div className="proj__card-bottom">
+        <span className="proj__category-badge">{proj.category}</span>
+        <div className="proj__tech">
+          {proj.technologies.slice(0, featured ? 5 : 4).map((t) => (
+            <span key={t} className="skill-pill">{t}</span>
+          ))}
+          {proj.technologies.length > (featured ? 5 : 4) && (
+            <span className="proj__tech-more">+{proj.technologies.length - (featured ? 5 : 4)}</span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="projects" className="projects-section">
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">Security Tools</h2>
-          <p className="section-subtitle">
-            A collection of innovative security tools, frameworks, and platforms I've developed to enhance
-            application security testing, vulnerability assessment, and security training.
+        <div className="section-header reveal">
+          <span className="section-eyebrow">Projects</span>
+          <h2 className="section-title">Open-source work</h2>
+          <p className="section-desc">
+            Tools, extensions, and frameworks built for the security community.
           </p>
         </div>
 
-        <ProjectFilter
-          filters={projectCategories}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
-
-        <div className={`projects-grid ${animated ? 'animated' : ''}`}>
-          {filteredProjects.map((project, index) => (
-            <div
-              className="project-card"
-              key={project.id}
-              style={{ animationDelay: `${index * 0.1}s` }}
+        {/* Filter tabs */}
+        <div className="proj__filters reveal delay-1">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`proj__filter-btn${active === cat ? ' proj__filter-btn--active' : ''}`}
+              onClick={() => setActive(cat)}
             >
-              <div className="project-content">
-                <div className="project-header">
-                  <h3 className="project-title">{project.title}</h3>
-                </div>
-                <p className="project-description">{project.description}</p>
-                <div className="project-tech">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-                <div className="project-links">
-                  <a href={project.link} className="project-link primary" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-github"></i>
-                    <span>View Project</span>
-                  </a>
-                  {project.demo && (
-                    <a href={project.demo} className="project-link secondary" target="_blank" rel="noopener noreferrer">
-                      <i className="fas fa-external-link-alt"></i>
-                      <span>Live Demo</span>
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
+              {cat}
+            </button>
           ))}
         </div>
+
+        {/* All view: featured 2 + rest grid */}
+        {showFeatured && (
+          <>
+            {filtered.length > 0 && (
+              <div className="proj__featured-row">
+                {filtered.slice(0, 2).map((proj) => renderCard(proj, true))}
+              </div>
+            )}
+            {filtered.length > 2 && (
+              <div className="proj__grid">
+                {filtered.slice(2).map((proj) => renderCard(proj, false))}
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Filtered view: single flat grid */}
+        {!showFeatured && (
+          <div className="proj__grid">
+            {filtered.map((proj) => renderCard(proj, false))}
+          </div>
+        )}
       </div>
     </section>
   );

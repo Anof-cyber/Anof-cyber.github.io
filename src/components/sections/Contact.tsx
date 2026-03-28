@@ -1,148 +1,173 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import './Contact.css';
 
+const SOCIAL = [
+  { href: 'https://github.com/Anof-cyber',           icon: 'fab fa-github',      label: 'GitHub',   handle: '@Anof-cyber'    },
+  { href: 'https://www.linkedin.com/in/souravkalal', icon: 'fab fa-linkedin-in', label: 'LinkedIn', handle: '/in/souravkalal' },
+  { href: 'https://twitter.com/AnofCyber',           icon: 'fab fa-x-twitter',   label: 'Twitter',  handle: '@AnofCyber'     },
+  { href: 'https://blog.souravkalal.tech',            icon: 'fas fa-pen-nib',     label: 'Blog',     handle: 'blog.souravkalal.tech' },
+];
+
 const Contact: React.FC = () => {
-  const [animate, setAnimate] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ ok: boolean; msg: string } | null>(null);
 
-  useEffect(() => {
-    // Add animation class after component mounts
-    const timer = setTimeout(() => {
-      setAnimate(true);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, []);
+  useScrollReveal('.contact-section .reveal');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    setSubmitting(true);
+    setStatus(null);
 
     try {
-      const response = await fetch('https://formspree.io/f/xoqbvkal', {
+      const res = await fetch('https://formspree.io/f/xoqbvkal', {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: new FormData(e.currentTarget),
+        headers: { Accept: 'application/json' },
       });
-
-      if (response.ok) {
-        setSubmitStatus({
-          success: true,
-          message: 'Thank you for your message! I will get back to you soon.'
-        });
-        form.reset();
+      if (res.ok) {
+        setStatus({ ok: true, msg: "Message sent! I'll get back to you soon." });
+        (e.target as HTMLFormElement).reset();
       } else {
-        setSubmitStatus({
-          success: false,
-          message: 'Oops! There was a problem sending your message. Please try again.'
-        });
+        setStatus({ ok: false, msg: 'Something went wrong. Please try again.' });
       }
-    } catch (error) {
-      setSubmitStatus({
-        success: false,
-        message: 'Oops! There was a problem sending your message. Please try again.'
-      });
+    } catch {
+      setStatus({ ok: false, msg: 'Something went wrong. Please try again.' });
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 
   return (
     <section id="contact" className="contact-section">
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">Contact Me</h2>
-          <p className="section-subtitle">
-            Have a project in mind or want to discuss security consulting? Feel free to reach out.
+        <div className="section-header reveal">
+          <span className="section-eyebrow">Contact</span>
+          <h2 className="section-title">Let's work together</h2>
+          <p className="section-desc">
+            Available for security consulting, penetration testing engagements, and tool development collaborations.
           </p>
         </div>
 
-        <div className={`contact-container ${animate ? 'animate' : ''}`}>
-          <div className="contact-info">
-            <div className="contact-details">
-              <p>Interested in collaborating? Let's connect!</p>
-              <p>I am available for security consulting, penetration testing, and secure code review.</p>
+        <div className="contact__grid">
+          {/* ── Left: Info ── */}
+          <div className="contact__info reveal delay-1">
+            <div className="contact__info-card">
+              <h3 className="contact__info-heading">Get in touch</h3>
+              <p className="contact__info-text">
+                Whether you have a security assessment, need a tool built, or just want
+                to discuss a topic reach out and I'll respond promptly.
+              </p>
 
-              <div className="contact-list">
-                <div className="contact-item">
-                  <span className="contact-label">Email:</span>
-                  <a href="mailto:kalalsourav20@gmail.com">kalalsourav20@gmail.com</a>
-                </div>
+              <div className="contact__email">
+                <i className="fas fa-envelope" aria-hidden="true" />
+                <a href="mailto:kalalsourav20@gmail.com">kalalsourav20@gmail.com</a>
+              </div>
+            </div>
 
-                <div className="contact-item">
-                  <span className="contact-label">LinkedIn:</span>
-                  <a href="https://www.linkedin.com/in/sourav-kalal/" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/sourav-kalal/</a>
-                </div>
-
-                <div className="contact-item">
-                  <span className="contact-label">GitHub:</span>
-                  <a href="https://github.com/Anof-cyber" target="_blank" rel="noopener noreferrer">https://github.com/Anof-cyber</a>
-                </div>
-
-                <div className="contact-item">
-                  <span className="contact-label">X:</span>
-                  <a href="https://x.com/Ano_F_" target="_blank" rel="noopener noreferrer">https://x.com/Ano_F_</a>
-                </div>
+            <div className="contact__socials-block">
+              <h4 className="contact__socials-label mono">Find me on</h4>
+              <div className="contact__socials">
+                {SOCIAL.map((s) => (
+                  <a
+                    key={s.href}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact__social-item"
+                  >
+                    <div className="contact__social-icon">
+                      <i className={s.icon} aria-hidden="true" />
+                    </div>
+                    <div className="contact__social-text">
+                      <span className="contact__social-label">{s.label}</span>
+                      <span className="contact__social-handle mono">{s.handle}</span>
+                    </div>
+                    <i className="fas fa-arrow-right contact__social-arrow" aria-hidden="true" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="contact-form-container">
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="fullname">Your Name</label>
+          {/* ── Right: Form ── */}
+          <div className="contact__form-wrap reveal delay-2">
+            <form className="contact__form" onSubmit={handleSubmit} noValidate>
+              <div className="form__row">
+                <div className="form__group">
+                  <label htmlFor="cf-name" className="form__label">Name</label>
+                  <input
+                    id="cf-name"
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                    className="form__input"
+                    autoComplete="name"
+                  />
+                </div>
+                <div className="form__group">
+                  <label htmlFor="cf-email" className="form__label">Email</label>
+                  <input
+                    id="cf-email"
+                    type="email"
+                    name="email"
+                    placeholder="your@email.com"
+                    required
+                    className="form__input"
+                    autoComplete="email"
+                  />
+                </div>
+              </div>
+
+              <div className="form__group">
+                <label htmlFor="cf-subject" className="form__label">Subject</label>
                 <input
+                  id="cf-subject"
                   type="text"
-                  id="fullname"
-                  name="fullname"
-                  required
-                  placeholder="John Doe"
-                  disabled={isSubmitting}
+                  name="subject"
+                  placeholder="What is this about?"
+                  className="form__input"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="john@example.com"
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
+              <div className="form__group">
+                <label htmlFor="cf-message" className="form__label">Message</label>
                 <textarea
-                  id="message"
+                  id="cf-message"
                   name="message"
+                  rows={6}
+                  placeholder="Tell me about your project or question..."
                   required
-                  placeholder="Tell me about your project or inquiry..."
-                  rows={5}
-                  disabled={isSubmitting}
+                  className="form__input form__textarea"
                 />
               </div>
 
-              <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
-
-              {submitStatus && (
-                <div className={`form-message ${submitStatus.success ? 'success' : 'error'}`}>
-                  {submitStatus.message}
+              {status && (
+                <div className={`form__status${status.ok ? ' form__status--ok' : ' form__status--err'}`}>
+                  <i className={`fas ${status.ok ? 'fa-check-circle' : 'fa-exclamation-circle'}`} />
+                  {status.msg}
                 </div>
               )}
 
-
+              <button
+                type="submit"
+                className={`btn btn-primary form__submit${submitting ? ' form__submit--loading' : ''}`}
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <i className="fas fa-spinner form__spinner" aria-hidden="true" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <i className="fas fa-paper-plane" aria-hidden="true" />
+                  </>
+                )}
+              </button>
             </form>
           </div>
         </div>

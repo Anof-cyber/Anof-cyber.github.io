@@ -1,60 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  /* Main Colors - Minimalist Dark Theme */
-  --primary-color: #FFFFFF; /* White */
-  --secondary-color: #999999; /* Medium gray */
-  --accent-color: #CCCCCC; /* Light gray */
-  --tertiary-color: #666666; /* Dark gray */
+  /* === BACKGROUNDS === */
+  --bg:         #1e2a36;
+  --bg-surface: #273341;
+  --bg-raised:  #2f3d4d;
+  --bg-hover:   #384858;
 
-  /* Text Colors */
-  --text-color: #E5E5E5; /* Light gray for text */
-  --text-secondary: #999999; /* Medium gray for secondary text */
-  --heading-color: #FFFFFF; /* White for headings */
+  /* === ACCENT === */
+  --accent:        #00d4c0;
+  --accent-dim:    rgba(0, 212, 192, 0.10);
+  --accent-border: rgba(0, 212, 192, 0.30);
+  --accent-glow:   0 0 24px rgba(0, 212, 192, 0.20);
 
-  /* Background Colors */
-  --background-dark: #0A0A0A; /* Almost black background */
-  --background-card: #1A1A1A; /* Dark gray for cards */
-  --background-light: #151515; /* Very dark gray */
-  --background-gradient: linear-gradient(135deg, #0A0A0A 0%, #151515 100%);
+  /* === TEXT === */
+  --text:       #e2e2e2;
+  --text-muted: #909090;
+  --text-dim:   #585858;
+  --text-white: #ffffff;
 
-  /* UI Elements */
-  --border-radius: 0px; /* Sharp, clean edges */
-  --border-radius-lg: 0px;
-  --border-color: #2A2A2A;
-  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --glow-green: none;
-  --glow-magenta: none;
-  --glow-purple: none;
-  --glow-cyan: none;
+  /* === BORDERS === */
+  --border:        rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.18);
 
-  /* Gradients - Removed for minimalist look */
-  --gradient-primary: var(--primary-color);
-  --gradient-accent: var(--accent-color);
-  --gradient-dark: var(--background-dark);
-  --gradient-glass: transparent;
+  /* === FONTS === */
+  --font:      'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-  /* Animation */
-  --transition-fast: all 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
-  --transition-medium: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  --transition-slow: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  /* === SPACING === */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
 
-  /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-family-mono: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  --font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  /* === LAYOUT === */
+  --container:     1100px;
+  --header-height: 64px;
+  --section-py:    6rem;
 
-  /* Spacing */
+  /* === RADIUS === */
+  --r-sm:   4px;
+  --r:      8px;
+  --r-lg:   12px;
+  --r-full: 9999px;
+
+  /* === TRANSITIONS === */
+  --t-fast: 150ms ease;
+  --t-base: 250ms ease;
+  --t-slow: 400ms ease;
+
+  /* === SHADOWS === */
+  --shadow:    0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.6);
+
+  /* === LEGACY COMPAT (used by some old selectors) === */
+  --background-dark:     var(--bg);
+  --background-card:     var(--bg-surface);
+  --background-light:    var(--bg-surface);
+  --background-section:  var(--bg-surface);
+  --border-color:        var(--border);
+  --text-color:          var(--text);
+  --text-secondary:      var(--text-muted);
+  --heading-color:       var(--text-white);
+  --primary-color:       var(--accent);
+  --font-family:         var(--font);
+  --font-family-mono:    var(--font-mono);
+  --font-family-heading: var(--font);
+  --transition-fast:     all var(--t-fast);
+  --transition-medium:   all var(--t-base);
+  --transition-slow:     all var(--t-slow);
+  --border-radius:       var(--r);
+  --border-radius-lg:    var(--r-lg);
+  --container-width:     var(--container);
+  --container-padding:   1.5rem;
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 3rem;
   --space-xl: 5rem;
-
-  /* Grid */
-  --container-width: 1200px;
-  --container-padding: 1.5rem;
-
-  /* Clean borders */
-  --hud-color: var(--primary-color);
-  --hud-border: 1px solid var(--border-color);
-  --hud-shadow: none;
+  --box-shadow: var(--shadow);
 }

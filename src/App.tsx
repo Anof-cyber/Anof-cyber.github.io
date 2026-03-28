@@ -2,12 +2,14 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Routes from './routes';
+import CursorFollower from './components/common/CursorFollower';
 import './styles/global.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <CursorFollower />
       <Layout>
         <Routes />
       </Layout>

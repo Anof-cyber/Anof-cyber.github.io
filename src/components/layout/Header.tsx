@@ -1,126 +1,146 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Header.css';
 
+const NAV_ITEMS = [
+  { label: 'About',      href: '#about'      },
+  { label: 'Skills',     href: '#skills'     },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects',   href: '#projects'   },
+  { label: 'Articles',   href: '#blogs'      },
+  { label: 'Videos',     href: '#videos'     },
+  { label: 'Contact',    href: '#contact'    },
+];
+
+const SECTIONS = ['home', 'about', 'skills', 'experience', 'projects', 'blogs', 'videos', 'contact'];
+
 const Header: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [scrolled,       setScrolled]       = useState(false);
+  const [menuOpen,       setMenuOpen]        = useState(false);
+  const [activeSection,  setActiveSection]   = useState('home');
+  const [progress,       setProgress]        = useState(0);
 
-  const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Blogs', href: '#blogs' },
-    { name: 'Videos', href: '#videos' },
-    { name: 'Contact', href: '#contact' }
-  ];
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 40);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
+    // Scroll progress
+    const el = document.documentElement;
+    const total = el.scrollHeight - el.clientHeight;
+    setProgress(total > 0 ? Math.min((el.scrollTop / total) * 100, 100) : 0);
 
-      // Header background effect
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+    const sorted = [...SECTIONS].reverse();
+    for (const id of sorted) {
+      const section = document.getElementById(id);
+      if (section && section.getBoundingClientRect().top <= 120) {
+        setActiveSection(id);
+        break;
       }
-
-      // Active section detection
-      const sections = ['home', 'about', 'skills', 'experience','projects', 'blogs', 'videos', 'contact'];
-
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-
-    // Prevent scrolling when menu is open
-    if (!menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   const closeMenu = () => {
     setMenuOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
+  };
+
+  const toggleMenu = () => {
+    const next = !menuOpen;
+    setMenuOpen(next);
+    document.body.style.overflow = next ? 'hidden' : '';
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    closeMenu();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const isActive = (href: string) => {
+    const section = href.replace('#', '');
+    return activeSection === section;
   };
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-      <div className="header-content container">
-        <div className="logo-container">
-          <Link to="/" className="logo">
-            <div className="logo-glitch" data-text="SK">SK</div>
-            <span className="logo-text">
-              <span className="text-gradient">Sourav</span> Kalal
+    <>
+      <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
+        <div className="header__inner container">
+          {/* Logo */}
+          <a href="#home" className="header__logo" onClick={(e) => handleNavClick(e, '#home')}>
+            <img src="/assets/profile.png" alt="Sourav Kalal" className="header__logo-img" />
+            <span className="header__logo-name">
+              Sourav<span className="header__logo-accent"> Kalal</span>
             </span>
-          </Link>
+          </a>
+
+          {/* Desktop nav */}
+          <nav className="header__nav" aria-label="Primary navigation">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`header__nav-link${isActive(item.href) ? ' header__nav-link--active' : ''}`}
+                onClick={(e) => handleNavClick(e, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Resume CTA */}
+          <a
+            href="https://blog.souravkalal.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header__cta btn btn-outline"
+          >
+            Blog
+          </a>
+
+          {/* Hamburger */}
+          <button
+            className={`header__burger${menuOpen ? ' header__burger--open' : ''}`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
         </div>
 
-        <button
-          className={`menu-toggle ${menuOpen ? 'active' : ''}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <div className="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+        {/* Scroll progress indicator */}
+        <div className="header__progress-track" aria-hidden="true">
+          <div className="header__progress-bar" style={{ width: `${progress}%` }} />
+        </div>
+      </header>
 
-        <nav className={`navbar ${menuOpen ? 'open' : ''}`}>
-          <div className="nav-backdrop" onClick={closeMenu}></div>
-          <ul className="nav-links">
-            {navItems.map((item, index) => (
-              <li
-                key={item.name}
-                style={{
-                  '--index': index,
-                  '--total': navItems.length
-                } as React.CSSProperties}
-              >
-                <a
-                  href={item.href}
-                  className={activeSection === item.href.replace('#', '') ? 'active' : ''}
-                  onClick={() => {
-                    closeMenu();
-                  }}
-                >
-                  {item.name}
-                  <span className="nav-indicator"></span>
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="nav-footer">
-            <a href="#contact" className="button nav-cta" onClick={closeMenu}>
-              <span>Let's Connect</span>
-              <i className="fas fa-arrow-right"></i>
+      {/* Mobile overlay */}
+      <div
+        className={`mobile-menu${menuOpen ? ' mobile-menu--open' : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        <nav className="mobile-menu__nav">
+          {NAV_ITEMS.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`mobile-menu__link${isActive(item.href) ? ' mobile-menu__link--active' : ''}`}
+              onClick={(e) => handleNavClick(e, item.href)}
+              style={{ animationDelay: `${i * 0.06}s` }}
+            >
+              <span className="mobile-menu__index mono">0{i + 1}.</span>
+              {item.label}
             </a>
-          </div>
+          ))}
         </nav>
       </div>
-    </header>
+    </>
   );
 };
 

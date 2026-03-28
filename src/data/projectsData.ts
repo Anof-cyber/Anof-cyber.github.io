@@ -33,7 +33,7 @@ export const projectsData: Project[] = [
   {
     id: 2,
     title: "ProxyBridge",
-    description: "Lightweight, open-source universal proxy client (Proxifier alternative) that provides transparent proxy routing for applications on Windows and macOS. Redirects TCP and UDP traffic from specific processes through SOCKS5 or HTTP proxies, with the ability to route, block, or allow traffic on a per-application basis. Works at the system level, making it compatible with proxy-unaware applications without requiring any configuration changes.",
+    description: "Lightweight, open-source universal proxy client (Proxifier alternative) that provides transparent proxy routing for applications on Windows, macOS and Linux. Redirects TCP and UDP traffic from specific processes through SOCKS5 or HTTP proxies, with the ability to route, block, or allow traffic on a per-application basis. Works at the system level, making it compatible with proxy-unaware applications without requiring any configuration changes.",
     technologies: [
       "C/C++",
       "C#",
@@ -45,6 +45,7 @@ export const projectsData: Project[] = [
       "SOCKS5",
       "Windows",
       "macOS",
+      "Linux",
       "Network Security"
     ],
     link: "https://github.com/InterceptSuite/ProxyBridge",

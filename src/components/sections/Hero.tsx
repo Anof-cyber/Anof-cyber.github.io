@@ -1,192 +1,182 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Hero.css';
 
+const ROLES = [
+   'Product Security Engineer',
+  'Security Engineer',
+  'Penetration Tester',
+  'Software Developer',
+  'Security Researcher',
+];
+
+const STATS = [
+  { target: 5,  suffix: '+', label: 'Years Experience' },
+  { target: 10, suffix: '+', label: 'Open Source Tools' },
+  { target: 9,  suffix: '+', label: 'Articles Published' },
+  { target: 2,  suffix: '',  label: 'Certifications'    },
+];
+
+const SOCIAL = [
+  { href: 'https://github.com/Anof-cyber',           icon: 'fab fa-github',      label: 'GitHub'   },
+  { href: 'https://www.linkedin.com/in/souravkalal', icon: 'fab fa-linkedin-in', label: 'LinkedIn' },
+  { href: 'https://twitter.com/AnofCyber',           icon: 'fab fa-x-twitter',   label: 'Twitter'  },
+  { href: 'https://blog.souravkalal.tech',            icon: 'fas fa-pen-nib',     label: 'Blog'     },
+];
+
+function useCounter(target: number, started: boolean) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!started) return;
+    let start = 0;
+    const step = Math.ceil(target / 30);
+    const interval = setInterval(() => {
+      start += step;
+      if (start >= target) { setVal(target); clearInterval(interval); }
+      else setVal(start);
+    }, 40);
+    return () => clearInterval(interval);
+  }, [target, started]);
+  return val;
+}
+
+const StatItem: React.FC<{ target: number; suffix: string; label: string; started: boolean }> = ({
+  target, suffix, label, started
+}) => {
+  const val = useCounter(target, started);
+  return (
+    <div className="hero__stat">
+      <span className="hero__stat-value accent">{val}{suffix}</span>
+      <span className="hero__stat-label">{label}</span>
+    </div>
+  );
+};
+
 const Hero: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [typedText, setTypedText] = useState('');
-  const fullText = "Security Engineer | Penetration Tester | Developer";
-  const typingSpeed = 70; // ms per character
-  const cycleTexts = ["Security Engineer", "Penetration Tester", "Web Developer", "Automation Expert"];
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(cycleTexts[0]);
-  const [isTyping, setIsTyping] = useState(true);
+  const [roleIndex, setRoleIndex]   = useState(0);
+  const [display,   setDisplay]     = useState('');
+  const [phase,     setPhase]       = useState<'typing' | 'pause' | 'erasing'>('typing');
+  const [loaded,    setLoaded]      = useState(false);
+  const [statsStarted, setStatsStarted] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-  const particlesRef = useRef<HTMLDivElement>(null);
-
-  // Typing effect for main title
   useEffect(() => {
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      if (i < fullText.length) {
-        setTypedText(prev => prev + fullText.charAt(i));
-        i++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, typingSpeed);
-
-    return () => clearInterval(typingInterval);
+    const t = setTimeout(() => {
+      setLoaded(true);
+      setTimeout(() => setStatsStarted(true), 800);
+    }, 80);
+    return () => clearTimeout(t);
   }, []);
 
-  // Typing effect for cycling texts
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
+    const current = ROLES[roleIndex];
+    const SPEED   = 65;
+    const ERASE   = 35;
+    const PAUSE   = 1800;
 
-    const typeNextText = (text: string, index = 0) => {
-      if (index <= text.length) {
-        setDisplayText(text.substring(0, index));
-        timeout = setTimeout(() => typeNextText(text, index + 1), typingSpeed);
+    if (phase === 'typing') {
+      if (display.length < current.length) {
+        timeoutRef.current = setTimeout(() => setDisplay(current.slice(0, display.length + 1)), SPEED);
       } else {
-        // Once typing is done, wait before erasing
-        timeout = setTimeout(() => {
-          setIsTyping(false);
-          eraseText(text);
-        }, 2000);
+        timeoutRef.current = setTimeout(() => setPhase('pause'), PAUSE);
       }
-    };
-
-    const eraseText = (text: string, index = text.length) => {
-      if (index >= 0) {
-        setDisplayText(text.substring(0, index));
-        timeout = setTimeout(() => eraseText(text, index - 1), typingSpeed / 2);
+    } else if (phase === 'pause') {
+      timeoutRef.current = setTimeout(() => setPhase('erasing'), 300);
+    } else {
+      if (display.length > 0) {
+        timeoutRef.current = setTimeout(() => setDisplay(current.slice(0, display.length - 1)), ERASE);
       } else {
-        // Once erased, move to next text
-        setIsTyping(true);
-        setCurrentTextIndex(prev => (prev + 1) % cycleTexts.length);
-        typeNextText(cycleTexts[(currentTextIndex + 1) % cycleTexts.length]);
-      }
-    };
-
-    if (isTyping) {
-      typeNextText(cycleTexts[currentTextIndex]);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [currentTextIndex, isTyping]);
-
-  // Create floating particles
-  useEffect(() => {
-    setIsLoaded(true);
-
-    if (particlesRef.current) {
-      const container = particlesRef.current;
-      container.innerHTML = '';
-
-      const particleCount = window.innerWidth < 768 ? 30 : 50;
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('cyber-particle');
-
-        const size = Math.random() * 4 + 1;
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const delay = Math.random() * 10;
-        const duration = Math.random() * 20 + 10;
-        const opacity = Math.random() * 0.5 + 0.1;
-        const isGlowing = Math.random() > 0.7;
-
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${x}%`;
-        particle.style.top = `${y}%`;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${delay}s`;
-        particle.style.opacity = `${opacity}`;
-
-        if (isGlowing) {
-          particle.classList.add('glow');
-          particle.style.boxShadow = Math.random() > 0.5 ?
-            '0 0 5px var(--primary-color), 0 0 10px var(--primary-color)' :
-            '0 0 5px var(--accent-color), 0 0 10px var(--accent-color)';
-        }
-
-        container.appendChild(particle);
+        setRoleIndex((i) => (i + 1) % ROLES.length);
+        setPhase('typing');
       }
     }
-  }, []);
+    return () => clearTimeout(timeoutRef.current);
+  }, [display, phase, roleIndex]);
+
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section id="home" className="hero-section">
-      <div className="cyber-grid"></div>
-      <div className="cyber-particles" ref={particlesRef}></div>
+    <section id="home" className="hero">
+      <div className="hero__grid" aria-hidden="true" />
 
-      <div className="container">
-        <div className="hero-content">
-          <div className="hero-text">
-            <div className="hero-greeting">
-              <div className="greeting-line"></div>
-              <span>Hello, I'm</span>
+      <div className="container hero__container">
+        {/* ── LEFT ── */}
+        <div className={`hero__left${loaded ? ' hero__left--loaded' : ''}`}>
+          <h1 className="hero__name reveal delay-1" data-text="Sourav Kalal">
+            Sourav<br />Kalal
+          </h1>
+
+          <div className="hero__role reveal delay-2">
+            <span className="hero__role-prefix mono">&gt; </span>
+            <span className="hero__role-text">{display}</span>
+            <span className="hero__cursor" aria-hidden="true" />
+          </div>
+
+          <p className="hero__desc reveal delay-3">
+            Security Engineer with 5+ years of hands-on experience in penetration testing,
+            product security, security consultancy, tool development, and security research.
+            I build open-source tools that make security testing more efficient.
+          </p>
+
+          <div className="hero__stats reveal delay-4">
+            {STATS.map((s) => (
+              <StatItem key={s.label} target={s.target} suffix={s.suffix}
+                        label={s.label} started={statsStarted} />
+            ))}
+          </div>
+
+          <div className="hero__actions reveal delay-5">
+            <a href="#projects" className="btn btn-primary" onClick={(e) => handleNav(e, '#projects')}>
+              View My Work
+            </a>
+            <a href="#contact" className="btn btn-outline" onClick={(e) => handleNav(e, '#contact')}>
+              Get In Touch
+            </a>
+          </div>
+
+          <div className="hero__socials reveal delay-6">
+            {SOCIAL.map((s) => (
+              <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer"
+                 className="hero__social" aria-label={s.label}>
+                <i className={s.icon} aria-hidden="true" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* ── RIGHT: Profile Photo ── */}
+        <div className={`hero__right${loaded ? ' hero__right--loaded' : ''}`}>
+          <div className="hero__photo-frame">
+            <div className="hero__photo-ring hero__photo-ring--1" aria-hidden="true" />
+            <div className="hero__photo-ring hero__photo-ring--2" aria-hidden="true" />
+            <div className="hero__photo-ring hero__photo-ring--3" aria-hidden="true" />
+            <div className="hero__photo-glow"                     aria-hidden="true" />
+            <div className="hero__photo-hex">
+              <img src="/assets/profile.png" alt="Sourav Kalal" className="hero__photo-img" />
+              <div className="hero__photo-scanline" aria-hidden="true" />
             </div>
 
-            <h1 className="hero-title">
-              <span className="name">Sourav Kalal</span>
-              <div className="title-bg"></div>
-            </h1>
-
-            <h2 className="hero-subtitle">
-              <span className="typing-text">{displayText}</span>
-              <span className="cursor"></span>
-            </h2>
-
-            <p className="hero-description">
-              A passionate cybersecurity professional specializing in penetration testing,
-              vulnerability assessment, and secure application development.
-            </p>              <div className="hero-cta">
-                <a href="#projects" className="button primary-button">
-                  <span>View Projects</span>
-                  <i className="fas fa-chevron-right"></i>
-                </a>
-
-                <a href="#contact" className="button secondary-button">
-                  <span>Contact Me</span>
-                  <i className="fas fa-paper-plane"></i>
-                </a>
-              </div>
+            <div className="hero__photo-badge hero__photo-badge--br mono">
+              <i className="fas fa-shield-halved" aria-hidden="true" />
+              <span>BSCP · eWPTX</span>
             </div>
-
-            <div className="hero-image">
-            <div className="image-wrapper">
-              <div className="image-frame">
-                <img src="/assets/profile.png" alt="Sourav Kalal" />
-                <div className="scan-line"></div>
-              </div>
-
-              <div className="image-decoration top-left"></div>
-              <div className="image-decoration top-right"></div>
-              <div className="image-decoration bottom-left"></div>
-              <div className="image-decoration bottom-right"></div>
-
-              <div className="image-border"></div>
+            <div className="hero__photo-badge hero__photo-badge--bl mono">
+              <i className="fas fa-map-marker-alt" aria-hidden="true" />
+              <span>India</span>
             </div>
-
-            <div className="tech-badge left">
-              <i className="fas fa-shield-alt"></i>
-              <span>Security</span>
-            </div>
-
-            <div className="tech-badge right">
-              <i className="fas fa-code"></i>
-              <span>Developer</span>
-            </div>
-
-            <div className="tech-badge bottom">
-              <i className="fas fa-terminal"></i>
-              <span>Hacker</span>
-            </div>
+            <div className="hero__photo-corner hero__photo-corner--tl" aria-hidden="true" />
+            <div className="hero__photo-corner hero__photo-corner--tr" aria-hidden="true" />
+            <div className="hero__photo-corner hero__photo-corner--bl" aria-hidden="true" />
+            <div className="hero__photo-corner hero__photo-corner--br" aria-hidden="true" />
           </div>
         </div>
       </div>
 
-      <div className="scroll-indicator">
-        <div className="mouse">
-          <div className="wheel"></div>
-        </div>
-        <div className="arrows">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div className={`hero__scroll${loaded ? ' hero__scroll--visible' : ''}`} aria-hidden="true">
+        <span className="mono">scroll</span>
+        <span className="hero__scroll-line" />
       </div>
     </section>
   );

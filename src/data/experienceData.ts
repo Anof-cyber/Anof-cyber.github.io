@@ -16,11 +16,36 @@ interface Experience {
 export const experienceData: Experience[] = [
   {
     id: 1,
-    title: "Security Engineer IV",
-    company: "Security Innovation Bureau Veritas",
-    startDate: "May 2023",
+    title: "Senior Product Security Engineer",
+    company: "Cybrilla",
+    startDate: "March 2026",
     endDate: "Present",
-    description: "Driving enterprise-level security initiatives and leading critical assessments for clients. Developed innovative testing methodologies for complex applications. Authored custom security tools and Burp Suite extensions to enhance assessment capabilities.",
+    description: "Leading product security initiatives across the SDLC from threat modeling and security design reviews to CI/CD pipeline hardening and cloud security. Conducting security assessments for product features, driving AWS security posture improvements, and collaborating with engineering teams to build secure-by-default systems.",
+    skills: [
+      "Product Security",
+      "Threat Modeling",
+      "Secure SDLC",
+      "Web Application Security",
+      "API Security Testing",
+      "Secure Code Review",
+      "Security Architecture Review",
+      "Cloud Security (AWS)",
+      "AWS IAM & Policies",
+      "AWS Security Hub",
+      "CI/CD Pipeline Security",
+      "Container Security",
+      "Dependency & SCA Review",
+      "SAST / DAST Integration",
+      "Risk Assessment & Management"
+    ]
+  },
+  {
+    id: 2,
+    title: "Senior Security Engineer I",
+    company: "Security Innovation A Bureau Veritas company",
+    startDate: "May 2023",
+    endDate: "February 2026",
+    description: "Drove enterprise-level security initiatives and led critical assessments for clients. Developed innovative testing methodologies for complex applications. Authored custom security tools and Burp Suite extensions to enhance assessment capabilities.",
     skills: [
       "Web Application Security",
       "Mobile Security (iOS/Android)",
@@ -37,8 +62,8 @@ export const experienceData: Experience[] = [
     ],
     promotions: [
       {
-        title: "Security Engineer IV",
-        date: "February 2025"
+        title: "Senior Security Engineer I",
+        date: "February 2025 - February 2026"
       },
       {
         title: "Security Engineer III",
@@ -51,7 +76,7 @@ export const experienceData: Experience[] = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: "Associate Security Analyst",
     company: "Indusface Pvt Ltd",
     startDate: "March 2022",
@@ -68,7 +93,7 @@ export const experienceData: Experience[] = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: "Security Consultant",
     company: "Security Brigade InfoSec Private Limited",
     startDate: "May 2020",

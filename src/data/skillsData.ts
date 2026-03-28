@@ -22,7 +22,7 @@ export const skillsData: SkillCategory[] = [
   {
     id: 2,
     title: "Application Security",
-    icon: "🛡️",
+    icon: "",
     skills: [
       {
         id: 201,
@@ -51,13 +51,41 @@ export const skillsData: SkillCategory[] = [
         proficiency: 90,
         level: "expert",
         description: "Security assessment of desktop applications across Windows, macOS, and Linux platforms, including binary analysis and runtime security testing."
+      },
+      {
+        id: 205,
+        name: "Product Security",
+        proficiency: 88,
+        level: "expert",
+        description: "Embedding security into the software development lifecycle through threat modeling, security design reviews, and working with engineering teams to build secure-by-default products."
+      },
+      {
+        id: 206,
+        name: "Threat Modeling",
+        proficiency: 85,
+        level: "advanced",
+        description: "Identifying and prioritizing potential security threats during the design phase using STRIDE and other methodologies to proactively reduce attack surface."
+      },
+      {
+        id: 207,
+        name: "Secure SDLC",
+        proficiency: 85,
+        level: "advanced",
+        description: "Integrating security practices across all phases of the software development lifecycle from requirements and design through deployment and maintenance."
+      },
+      {
+        id: 208,
+        name: "Secure Code Review",
+        proficiency: 85,
+        level: "advanced",
+        description: "Manual and automated source code analysis to identify security vulnerabilities, insecure patterns, and logic flaws across multiple languages and frameworks."
       }
     ]
   },
   {
     id: 3,
     title: "Infrastructure Security",
-    icon: "🔍",
+    icon: "",
     skills: [
       {
         id: 301,
@@ -99,7 +127,7 @@ export const skillsData: SkillCategory[] = [
   {
     id: 1,
     title: "Languages & Development",
-    icon: "💻",
+    icon: "",
     skills: [
 
       {
@@ -164,15 +192,31 @@ export const skillsData: SkillCategory[] = [
 ];
 
 export const toolsList: Tool[] = [
-  { name: "Burp Suite", icon: "🔍" },
-  { name: "Metasploit", icon: "🧪" },
-  { name: "Nmap", icon: "🔎" },
-  { name: "OWASP ZAP", icon: "🕷️" },
-  { name: "Docker", icon: "🐳" },
-  { name: "Git", icon: "📊" },
-  { name: "Jenkins", icon: "⚡" },
-  { name: "Python", icon: "🐍" },
-  { name: "TypeScript", icon: "💻" },
-  { name: "Java", icon: "☕" },
-  { name: "Kali Linux", icon: "🐉" }
+  { name: "Burp Suite",              icon: "" },
+  { name: "Metasploit",              icon: "" },
+  { name: "Nmap",                    icon: "" },
+  { name: "OWASP ZAP",               icon: "" },
+  { name: "Frida",                   icon: "" },
+  { name: "MobSF",                   icon: "" },
+  { name: "Objection",               icon: "" },
+  { name: "jadx",                    icon: "" },
+  { name: "Ghidra",                  icon: "" },
+  { name: "Wireshark",               icon: "" },
+  { name: "Snyk",                    icon: "" },
+  { name: "SonarQube",               icon: "" },
+  { name: "OWASP Dependency Check",  icon: "" },
+  { name: "Semgrep",                 icon: "" },
+  { name: "AWS Security Hub",        icon: "" },
+  { name: "AWS IAM",                 icon: "" },
+  { name: "AWS GuardDuty",           icon: "" },
+  { name: "AWS Inspector",           icon: "" },
+  { name: "ScoutSuite",              icon: "" },
+  { name: "Prowler",                 icon: "" },
+  { name: "Docker",                  icon: "" },
+  { name: "Git",                     icon: "" },
+  { name: "Jenkins",                 icon: "" },
+  { name: "Python",                  icon: "" },
+  { name: "TypeScript",              icon: "" },
+  { name: "Java",                    icon: "" },
+  { name: "Kali Linux",              icon: "" }
 ];

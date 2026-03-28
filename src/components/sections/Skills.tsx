@@ -1,81 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { skillsData } from '../../data/skillsData';
+import React from 'react';
+import { skillsData, toolsList } from '../../data/skillsData';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import './Skills.css';
 
+const CATEGORY_ICONS: Record<string, string> = {
+  'Application Security':       'fas fa-shield-halved',
+  'Infrastructure Security':    'fas fa-network-wired',
+  'Languages & Development':    'fas fa-code',
+};
+
 const Skills: React.FC = () => {
-  const [animatedSkills, setAnimatedSkills] = useState<Record<string, boolean>>({});
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const skillElements = document.querySelectorAll('.skill-item');
-      skillElements.forEach((element) => {
-        const position = element.getBoundingClientRect();
-
-        // If element is in viewport
-        if (position.top < window.innerHeight && position.bottom >= 0) {
-          const id = element.getAttribute('data-id');
-          if (id) {
-            setAnimatedSkills(prev => ({ ...prev, [id]: true }));
-          }
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    // Trigger once on component mount
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  useScrollReveal('.skills-section .reveal');
 
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">Technical Expertise</h2>
-          <p className="section-subtitle">
-            My professional skills and areas of specialization in cybersecurity, software development, and security testing.
+        <div className="section-header reveal">
+          <span className="section-eyebrow">Skills</span>
+          <h2 className="section-title">Technical expertise</h2>
+          <p className="section-desc">
+            Covering the full spectrum from application security to system-level assessments and tool development.
           </p>
         </div>
 
-        <div className="skills-container">
-          {skillsData.map((category) => (
-            <div key={category.id} className="skill-category">
-              <div className="category-header">
-                <span className="category-icon">{category.icon}</span>
-                <h3 className="category-title">{category.title}</h3>
+        {/* Skill categories */}
+        <div className="skills__grid">
+          {skillsData.map((cat, i) => (
+            <div
+              key={cat.id}
+              className={`skills__card reveal delay-${Math.min(i + 1, 6)}`}
+            >
+              <div className="skills__card-header">
+                <div className="skills__card-icon">
+                  <i
+                    className={CATEGORY_ICONS[cat.title] ?? 'fas fa-star'}
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="skills__card-title">{cat.title}</h3>
               </div>
 
-              <div className="skills-grid">
-                {category.skills.map((skill) => (
-                  <div
+              <div className="skills__pills">
+                {cat.skills.map((skill) => (
+                  <span
                     key={skill.id}
-                    className="skill-item"
-                    data-id={`skill-${skill.id}`}
+                    className={`skill-pill${skill.level === 'expert' ? ' skill-pill--accent' : ''}`}
+                    title={skill.description}
                   >
-                    <div className="skill-header">
-                      <h4 className="skill-name">{skill.name}</h4>
-                    </div>
-                    <div className="skill-bar-container">
-                      <div
-                        className="skill-bar"
-                        style={{
-                          width: animatedSkills[`skill-${skill.id}`]
-                            ? `${skill.proficiency}%`
-                            : '0%'
-                        }}
-                      >
-                        <span className="skill-percentage">{skill.proficiency}%</span>
-                      </div>
-                    </div>
-                    <p className="skill-description">{skill.description}</p>
-                  </div>
+                    {skill.name}
+                  </span>
                 ))}
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Tools marquee ticker */}
+        <div className="skills__tools reveal">
+          <h3 className="skills__tools-label mono">Tools I use</h3>
+          <div className="skills__ticker">
+            <div className="skills__ticker-track">
+              {[...toolsList, ...toolsList].map((tool, i) => (
+                <span key={`${tool.name}-${i}`} className="tools-pill">
+                  {tool.name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
