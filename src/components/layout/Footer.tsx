@@ -3,8 +3,8 @@ import './Footer.css';
 
 const SOCIAL_LINKS = [
   { href: 'https://github.com/Anof-cyber',           icon: 'fab fa-github',      label: 'GitHub'   },
-  { href: 'https://www.linkedin.com/in/souravkalal', icon: 'fab fa-linkedin-in', label: 'LinkedIn' },
-  { href: 'https://twitter.com/AnofCyber',           icon: 'fab fa-x-twitter',   label: 'Twitter'  },
+  { href: 'https://www.linkedin.com/in/sourav-kalal/', icon: 'fab fa-linkedin-in', label: 'LinkedIn' },
+  { href: 'https://x.com/Ano_f_',                      icon: 'fab fa-x-twitter',   label: 'Twitter'  },
   { href: 'https://blog.souravkalal.tech',            icon: 'fas fa-pen-nib',     label: 'Blog'     },
 ];
 
