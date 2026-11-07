@@ -1,27 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  /* === BACKGROUNDS === */
-  --bg:         #1e2a36;
-  --bg-surface: #273341;
-  --bg-raised:  #2f3d4d;
-  --bg-hover:   #384858;
+  /* === BACKGROUNDS (neutral dark) === */
+  --bg:         #121212;
+  --bg-surface: #1a1a1a;
+  --bg-raised:  #212121;
+  --bg-hover:   #2a2a2a;
 
-  /* === ACCENT === */
-  --accent:        #00d4c0;
-  --accent-dim:    rgba(0, 212, 192, 0.10);
-  --accent-border: rgba(0, 212, 192, 0.30);
-  --accent-glow:   0 0 24px rgba(0, 212, 192, 0.20);
+  /* === ACCENT (chocolate — same hue as #251914, lifted for readability) === */
+  --accent:        #a3704a;
+  --accent-dim:    rgba(163, 112, 74, 0.12);
+  --accent-border: rgba(163, 112, 74, 0.30);
+  --accent-glow:   none;
 
   /* === TEXT === */
-  --text:       #e2e2e2;
-  --text-muted: #909090;
-  --text-dim:   #585858;
-  --text-white: #ffffff;
+  --text:       #e7e7e7;
+  --text-muted: #969696;
+  --text-dim:   #5e5e5e;
+  --text-white: #f5f5f5;
 
   /* === BORDERS === */
-  --border:        rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.18);
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
 
   /* === FONTS === */
   --font:      'Inter', system-ui, -apple-system, sans-serif;

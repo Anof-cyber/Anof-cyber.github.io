@@ -11,6 +11,16 @@ export interface BlogPost {
 
 export const blogsData: BlogPost[] = [
   {
+    id: 10,
+    title: "Intercept HTTP/3 Traffic: QUIC and QPACK Explained",
+    description: "HTTP/3 runs over QUIC and UDP, so traditional HTTP proxies never see it. A hands-on deep dive into intercepting real HTTP/3 traffic from curl and Microsoft Edge, and decoding QUIC streams and QPACK headers byte by byte.",
+    date: "Oct 2026",
+    link: "https://interceptsuite.com/blog/intercept-http3-traffic-quic-qpack-explained/",
+    publishedOn: "InterceptSuite Blog",
+    readTime: "16 min read",
+    category: "Network Security"
+  },
+  {
     id: 1,
     title: "Intercepting Thick Client TCP and TLS Traffic",
     description: "Intercepting and analysing the traffic is one of the important parts of the pentest, whether it's a mobile, web or desktop application.",

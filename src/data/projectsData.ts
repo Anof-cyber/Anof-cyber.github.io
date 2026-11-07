@@ -7,6 +7,7 @@ export interface Project {
   image: string;
   category: string;
   demo?: string;
+  commercial?: boolean;
 }
 
 export const projectsData: Project[] = [
@@ -28,7 +29,8 @@ export const projectsData: Project[] = [
     ],
     link: "https://github.com/InterceptSuite/InterceptSuite",
     image: "/assets/interceptsuite.jpg",
-    category: "Security Tools"
+    category: "Security Tools",
+    commercial: true
   },
   {
     id: 2,

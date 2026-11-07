@@ -2,16 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Hero.css';
 
 const ROLES = [
-   'Product Security Engineer',
-  'Security Engineer',
+  'Product Security Engineer',
   'Penetration Tester',
-  'Software Developer',
+  'DevSecOps Engineer',
+  'Cloud Security Engineer',
+  'Software Engineer',
   'Security Researcher',
 ];
 
 const STATS = [
-  { target: 5,  suffix: '+', label: 'Years Experience' },
-  { target: 10, suffix: '+', label: 'Open Source Tools' },
+  { target: 6,  suffix: '+', label: 'Years Experience' },
+  { target: 10, suffix: '+', label: 'Tools Built'      },
   { target: 9,  suffix: '+', label: 'Articles Published' },
   { target: 2,  suffix: '',  label: 'Certifications'    },
 ];
@@ -99,12 +100,10 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="hero">
-      <div className="hero__grid" aria-hidden="true" />
-
       <div className="container hero__container">
         {/* ── LEFT ── */}
         <div className={`hero__left${loaded ? ' hero__left--loaded' : ''}`}>
-          <h1 className="hero__name reveal delay-1" data-text="Sourav Kalal">
+          <h1 className="hero__name reveal delay-1">
             Sourav<br />Kalal
           </h1>
 
@@ -115,9 +114,10 @@ const Hero: React.FC = () => {
           </div>
 
           <p className="hero__desc reveal delay-3">
-            Security Engineer with 5+ years of hands-on experience in penetration testing,
-            product security, security consultancy, tool development, and security research.
-            I build open-source tools that make security testing more efficient.
+            I'm a security engineer, offensive testing and product security across web, API,
+            mobile, and thick-client. I can also build the software and run the cloud and
+            infrastructure behind it so whatever I secure, I'm able to engineer, deploy, and
+            operate it too.
           </p>
 
           <div className="hero__stats reveal delay-4">
@@ -149,13 +149,8 @@ const Hero: React.FC = () => {
         {/* ── RIGHT: Profile Photo ── */}
         <div className={`hero__right${loaded ? ' hero__right--loaded' : ''}`}>
           <div className="hero__photo-frame">
-            <div className="hero__photo-ring hero__photo-ring--1" aria-hidden="true" />
-            <div className="hero__photo-ring hero__photo-ring--2" aria-hidden="true" />
-            <div className="hero__photo-ring hero__photo-ring--3" aria-hidden="true" />
-            <div className="hero__photo-glow"                     aria-hidden="true" />
             <div className="hero__photo-hex">
               <img src="/assets/profile.png" alt="Sourav Kalal" className="hero__photo-img" />
-              <div className="hero__photo-scanline" aria-hidden="true" />
             </div>
 
             <div className="hero__photo-badge hero__photo-badge--br mono">
@@ -167,8 +162,6 @@ const Hero: React.FC = () => {
               <span>India</span>
             </div>
             <div className="hero__photo-corner hero__photo-corner--tl" aria-hidden="true" />
-            <div className="hero__photo-corner hero__photo-corner--tr" aria-hidden="true" />
-            <div className="hero__photo-corner hero__photo-corner--bl" aria-hidden="true" />
             <div className="hero__photo-corner hero__photo-corner--br" aria-hidden="true" />
           </div>
         </div>

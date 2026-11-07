@@ -45,7 +45,7 @@
   flex-direction: column;
   gap: 0.75rem;
   background: var(--bg-raised);
-  border: 1px solid rgba(0, 212, 192, 0.25);
+  border: 1px solid rgba(163, 112, 74, 0.25);
   border-radius: var(--r-lg);
   padding: 2rem 2.25rem;
   margin-bottom: 1.75rem;
@@ -63,8 +63,8 @@
   border-radius: 0 2px 2px 0;
 }
 .blog__featured:hover {
-  border-color: rgba(0, 212, 192, 0.5);
-  box-shadow: 0 8px 40px rgba(0, 212, 192, 0.1), 0 2px 8px rgba(0,0,0,0.3);
+  border-color: rgba(163, 112, 74, 0.5);
+  box-shadow: 0 8px 40px rgba(163, 112, 74, 0.1), 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .blog__featured-label {
@@ -161,8 +161,8 @@
   gap: 0;
 }
 .blog__card:hover {
-  border-color: rgba(0, 212, 192, 0.3);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 12px rgba(0, 212, 192,0.07);
+  border-color: rgba(163, 112, 74, 0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 12px rgba(163, 112, 74,0.07);
   transform: translateY(-3px);
 }
 

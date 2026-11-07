@@ -229,8 +229,8 @@
   font-weight: 500;
 }
 .form__status--ok  {
-  background: rgba(0, 212, 192, 0.08);
-  border: 1px solid rgba(0, 212, 192, 0.25);
+  background: rgba(163, 112, 74, 0.08);
+  border: 1px solid rgba(163, 112, 74, 0.25);
   color: var(--accent);
 }
 .form__status--err {

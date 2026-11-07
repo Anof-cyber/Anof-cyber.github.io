@@ -54,12 +54,35 @@
 
 .proj__card--featured {
   min-height: 340px;
-  border-color: rgba(0, 212, 192, 0.2);
+  border-color: rgba(163, 112, 74, 0.2);
   background: var(--bg-raised);
 }
 .proj__card--featured:hover {
-  border-color: rgba(0, 212, 192, 0.45);
-  box-shadow: 0 8px 40px rgba(0, 212, 192, 0.12), 0 2px 8px rgba(0,0,0,0.4);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+
+.proj__title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.proj__status {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 0.1rem 0.45rem;
+  white-space: nowrap;
+}
+.proj__status--commercial {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-dim);
 }
 
 .proj__featured-label {
@@ -108,8 +131,6 @@
 
 /* ---- Card ---- */
 .proj__card {
-  --mx: 50%;
-  --my: 50%;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
@@ -119,13 +140,11 @@
   justify-content: space-between;
   gap: 1.25rem;
   transition: border-color 0.3s ease,
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s ease;
   min-height: 280px;
   position: relative;
   overflow: hidden;
-  transform-style: preserve-3d;
-  will-change: transform;
 }
 /* ---- Staggered entrance delays ---- */
 .proj__card                { --anim-delay: 0s; }
@@ -150,36 +169,21 @@
 .proj__card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  top: 0; left: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--accent);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 1;
 }
-/* Mouse-follow spotlight */
-.proj__card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--r-lg);
-  background: radial-gradient(
-    220px circle at var(--mx) var(--my),
-    rgba(0, 212, 192, 0.11) 0%,
-    transparent 65%
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-  z-index: 0;
-}
 .proj__card:hover {
-  border-color: rgba(0, 212, 192, 0.35);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0, 212, 192,0.10);
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
 }
-.proj__card:hover::before { opacity: 1; }
-.proj__card:hover::after  { opacity: 1; }
+.proj__card:hover::before { opacity: 0.7; }
 
 /* Card top */
 .proj__card-top {
@@ -230,7 +234,7 @@
 /* Title */
 .proj__title {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-white);
   margin: 0;
   line-height: 1.35;

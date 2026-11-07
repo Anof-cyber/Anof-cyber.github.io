@@ -1,6 +1,6 @@
 # Portfolio Website
 
-This is a personal portfolio website built with React and TypeScript. It showcases my skills, projects, experience, and tools as a security engineer, penetration tester, and open-source developer.
+This is a personal portfolio website built with React and TypeScript. I'm a security engineer — offensive testing and product security — who can also build the software, cloud, and infrastructure behind it (AWS, Terraform/IaC, CI/CD, DevSecOps). It showcases my skills, projects, experience, and open-source tools.
 
 ## Features
 

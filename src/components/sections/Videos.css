@@ -72,7 +72,7 @@
   justify-content: center;
   font-size: 1.1rem;
   padding-left: 3px; /* optical center for play icon */
-  box-shadow: 0 0 24px rgba(0, 212, 192, 0.4);
+  box-shadow: 0 0 24px rgba(163, 112, 74, 0.4);
 }
 
 /* Duration badge */

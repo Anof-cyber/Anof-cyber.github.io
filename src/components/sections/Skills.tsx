@@ -4,9 +4,10 @@ import { useScrollReveal } from '../../hooks/useScrollReveal';
 import './Skills.css';
 
 const CATEGORY_ICONS: Record<string, string> = {
-  'Application Security':       'fas fa-shield-halved',
-  'Infrastructure Security':    'fas fa-network-wired',
-  'Languages & Development':    'fas fa-code',
+  'Offensive Security':                 'fas fa-bug',
+  'Product & Application Security':      'fas fa-shield-halved',
+  'Cloud, DevSecOps & Infrastructure':  'fas fa-cloud',
+  'Software Engineering':               'fas fa-code',
 };
 
 const Skills: React.FC = () => {
@@ -17,9 +18,11 @@ const Skills: React.FC = () => {
       <div className="container">
         <div className="section-header reveal">
           <span className="section-eyebrow">Skills</span>
-          <h2 className="section-title">Technical expertise</h2>
+          <h2 className="section-title">I secure it, and I build it</h2>
           <p className="section-desc">
-            Covering the full spectrum from application security to system-level assessments and tool development.
+            I work in security, offensive testing and product security. I can also write the
+            software and run the cloud and infrastructure, so whatever I assess, I'm able to
+            build, configure, and operate it too.
           </p>
         </div>
 

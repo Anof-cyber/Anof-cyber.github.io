@@ -40,6 +40,25 @@ export const experienceData: Experience[] = [
     ]
   },
   {
+    id: 5,
+    title: "Founder & Creator",
+    company: "InterceptSuite",
+    startDate: "April 2025",
+    endDate: "Present",
+    description: "Founder and lead developer of InterceptSuite, a commercial cross-platform MITM proxy for non-HTTP protocols (TCP, TLS, UDP, DTLS). I design, build, and maintain the product end to end, and lead the open-source projects released under the InterceptSuite umbrella, including ProxyBridge.",
+    skills: [
+      "Product Development",
+      "C / C++",
+      "C# / .NET",
+      "OpenSSL",
+      "TLS/SSL Interception",
+      "SOCKS5",
+      "Cross-Platform (Windows/macOS/Linux)",
+      "Network Security",
+      "Open Source Maintenance"
+    ]
+  },
+  {
     id: 2,
     title: "Senior Security Engineer I",
     company: "Security Innovation A Bureau Veritas company",

@@ -21,7 +21,7 @@ export interface Tool {
 export const skillsData: SkillCategory[] = [
   {
     id: 2,
-    title: "Application Security",
+    title: "Offensive Security",
     icon: "",
     skills: [
       {
@@ -32,18 +32,18 @@ export const skillsData: SkillCategory[] = [
         description: "Advanced penetration testing of web applications and APIs, focusing on authentication, authorization, and business logic flaws."
       },
       {
-        id: 202,
-        name: "Mobile Security",
-        proficiency: 90,
-        level: "expert",
-        description: "Comprehensive security assessments of Android and iOS applications, including reverse engineering and runtime analysis."
-      },
-      {
         id: 203,
         name: "API Security",
         proficiency: 90,
         level: "expert",
         description: "Deep expertise in REST/GraphQL API testing, focusing on authentication, rate limiting, and data validation."
+      },
+      {
+        id: 202,
+        name: "Mobile Security",
+        proficiency: 90,
+        level: "expert",
+        description: "Comprehensive security assessments of Android and iOS applications, including reverse engineering and runtime analysis."
       },
       {
         id: 204,
@@ -52,6 +52,27 @@ export const skillsData: SkillCategory[] = [
         level: "expert",
         description: "Security assessment of desktop applications across Windows, macOS, and Linux platforms, including binary analysis and runtime security testing."
       },
+      {
+        id: 209,
+        name: "Network Penetration Testing",
+        proficiency: 85,
+        level: "advanced",
+        description: "Internal and external network assessments, vulnerability validation, and exploitation across on-prem and cloud networks."
+      },
+      {
+        id: 210,
+        name: "Security Research",
+        proficiency: 85,
+        level: "advanced",
+        description: "Vulnerability research, tooling, and published articles that turn real pentest gaps into reusable techniques."
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Product & Application Security",
+    icon: "",
+    skills: [
       {
         id: 205,
         name: "Product Security",
@@ -79,76 +100,103 @@ export const skillsData: SkillCategory[] = [
         proficiency: 85,
         level: "advanced",
         description: "Manual and automated source code analysis to identify security vulnerabilities, insecure patterns, and logic flaws across multiple languages and frameworks."
+      },
+      {
+        id: 211,
+        name: "Security Architecture Review",
+        proficiency: 85,
+        level: "advanced",
+        description: "Assessment of system architectures, secure design patterns, and security control implementation review."
+      },
+      {
+        id: 212,
+        name: "SAST / DAST / SCA",
+        proficiency: 85,
+        level: "advanced",
+        description: "Selecting, tuning, and integrating static, dynamic, and dependency scanning so findings reach engineers with low noise."
       }
     ]
   },
   {
-    id: 3,
-    title: "Infrastructure Security",
+    id: 4,
+    title: "Cloud, DevSecOps & Infrastructure",
     icon: "",
     skills: [
       {
-        id: 301,
-        name: "Network Security",
+        id: 401,
+        name: "AWS",
         proficiency: 85,
-        level: "expert",
-        description: "Network infrastructure assessment, vulnerability scanning, and network penetration testing."
+        level: "advanced",
+        description: "Designing, building, and securing AWS workloads: IAM, VPC networking, and account posture across security and platform concerns."
       },
       {
-        id: 302,
-        name: "Security Architecture Review",
-        proficiency: 85,
-        level: "expert",
-        description: "Assessment of system architectures, secure design patterns, and security control implementation review."
+        id: 402,
+        name: "Terraform & IaC",
+        proficiency: 82,
+        level: "advanced",
+        description: "Provisioning and managing cloud infrastructure as code with Terraform, including reusable modules and policy-as-code guardrails."
       },
       {
-        id: 303,
-        name: "Configuration Review",
-        proficiency: 90,
-        level: "expert",
-        description: "Security configuration assessment of servers, network devices, and security appliances including hardening validation."
+        id: 403,
+        name: "CI/CD Pipelines",
+        proficiency: 85,
+        level: "advanced",
+        description: "Building and hardening CI/CD pipelines (GitHub Actions, GitLab CI, Jenkins) with security gates baked in."
       },
       {
-        id: 304,
-        name: "Firewall & Network Controls",
-        proficiency: 85,
-        level: "expert",
-        description: "Analysis of firewall rules, network segmentation, access controls, and security device configurations."
+        id: 404,
+        name: "Docker & Kubernetes",
+        proficiency: 78,
+        level: "advanced",
+        description: "Containerizing and orchestrating applications, plus securing images, registries, and cluster configuration."
       },
       {
-        id: 305,
-        name: "DevSecOps",
+        id: 405,
+        name: "Cloud Security Posture",
         proficiency: 85,
-        level: "expert",
-        description: "Integration of security controls in CI/CD pipelines and implementation of security automation."
+        level: "advanced",
+        description: "Managing AWS security posture with GuardDuty, Security Hub, and CSPM tooling such as Prowler and ScoutSuite."
+      },
+      {
+        id: 406,
+        name: "Networking",
+        proficiency: 80,
+        level: "advanced",
+        description: "Network design, segmentation, firewalls, and access controls across on-prem and cloud environments."
+      },
+      {
+        id: 407,
+        name: "Linux & System Administration",
+        proficiency: 82,
+        level: "advanced",
+        description: "Operating, hardening, and automating Linux systems that run production workloads and tooling."
       }
     ]
   },
   {
     id: 1,
-    title: "Languages & Development",
+    title: "Software Engineering",
     icon: "",
     skills: [
-
       {
         id: 101,
         name: "Python",
-        proficiency: 80,
+        proficiency: 85,
         level: "expert",
-        description: "Primary language for security tool development, automation, and web application development with Django/Flask."
+        description: "Primary language for security tool development, automation, and backend web development with Django/Flask."
       },
       {
         id: 103,
         name: "TypeScript",
-        proficiency: 70,
-        level: "expert",
+        proficiency: 75,
+        level: "advanced",
         description: "Modern web application development with React, security tooling, and type-safe application development."
       },
       {
         id: 104,
         name: "JavaScript",
-        proficiency: 70,
-        level: "expert",
+        proficiency: 75,
+        level: "advanced",
         description: "Frontend development, browser extensions, and security automation scripts."
       },
       {
@@ -168,11 +216,10 @@ export const skillsData: SkillCategory[] = [
       {
         id: 105,
         name: "Bash",
-        proficiency: 70,
+        proficiency: 75,
         level: "advanced",
-        description: "Shell scripting for security automation, penetration testing, and system administration."
+        description: "Shell scripting for security automation, infrastructure tasks, and system administration."
       },
-
       {
         id: 102,
         name: "Java",
@@ -184,8 +231,8 @@ export const skillsData: SkillCategory[] = [
         id: 106,
         name: "C",
         proficiency: 50,
-        level: "advanced",
-        description: "Low-level programming for reverse engineering, malware analysis, and system-level security assessments."
+        level: "intermediate",
+        description: "Low-level programming for reverse engineering, native tooling, and system-level security work."
       }
     ]
   }
@@ -204,19 +251,24 @@ export const toolsList: Tool[] = [
   { name: "Wireshark",               icon: "" },
   { name: "Snyk",                    icon: "" },
   { name: "SonarQube",               icon: "" },
-  { name: "OWASP Dependency Check",  icon: "" },
   { name: "Semgrep",                 icon: "" },
+  { name: "OWASP Dependency Check",  icon: "" },
+  { name: "AWS",                     icon: "" },
+  { name: "Terraform",               icon: "" },
+  { name: "Docker",                  icon: "" },
+  { name: "Kubernetes",              icon: "" },
+  { name: "GitHub Actions",          icon: "" },
+  { name: "GitLab CI",               icon: "" },
+  { name: "Jenkins",                 icon: "" },
+  { name: "Ansible",                 icon: "" },
   { name: "AWS Security Hub",        icon: "" },
-  { name: "AWS IAM",                 icon: "" },
   { name: "AWS GuardDuty",           icon: "" },
   { name: "AWS Inspector",           icon: "" },
-  { name: "ScoutSuite",              icon: "" },
   { name: "Prowler",                 icon: "" },
-  { name: "Docker",                  icon: "" },
+  { name: "ScoutSuite",              icon: "" },
   { name: "Git",                     icon: "" },
-  { name: "Jenkins",                 icon: "" },
+  { name: "Linux",                   icon: "" },
   { name: "Python",                  icon: "" },
   { name: "TypeScript",              icon: "" },
-  { name: "Java",                    icon: "" },
   { name: "Kali Linux",              icon: "" }
 ];

@@ -22,15 +22,15 @@ const CERTS = [
 ];
 
 const HIGHLIGHTS = [
-  { icon: 'fas fa-bug',         text: 'Web, API, Mobile & Thick Client Pentesting' },
-  { icon: 'fas fa-code',        text: 'Security Tool Development & Automation'     },
-  { icon: 'fas fa-pen-nib',     text: '9+ Published Security Articles'            },
-  { icon: 'fas fa-cube',        text: 'Open-source Projects with 1K+ GitHub Stars' },
+  { icon: 'fas fa-bug',           text: 'Web, API, Mobile & Thick Client Pentesting' },
+  { icon: 'fas fa-shield-halved', text: 'Product Security, Threat Modeling & SSDLC'   },
+  { icon: 'fas fa-cloud',         text: 'AWS, Terraform/IaC, CI/CD & DevSecOps'       },
+  { icon: 'fas fa-code',          text: 'Security Tool Development (Commercial & OSS)' },
 ];
 
 const ABOUT_STATS = [
-  { value: '5+',  label: 'Years\nExperience',     icon: 'fas fa-calendar-check' },
-  { value: '10+', label: 'Open Source\nTools',    icon: 'fas fa-cube'           },
+  { value: '6+',  label: 'Years\nExperience',     icon: 'fas fa-calendar-check' },
+  { value: '10+', label: 'Security\nTools Built',  icon: 'fas fa-cube'           },
   { value: '9+',  label: 'Published\nArticles',   icon: 'fas fa-pen-nib'        },
   { value: '2',   label: 'Certifications\nEarned', icon: 'fas fa-medal'         },
 ];
@@ -61,26 +61,19 @@ const About: React.FC = () => {
           {/* ── Row 2 left: Bio ── */}
           <div className="about__bento-bio reveal delay-1">
             <p className="about__lead">
-              With over <strong>5 years of hands-on experience</strong>, I work across both
-              offensive security and product security engineering from hands-on penetration
-              testing to embedding security into the full software development lifecycle. I bridge
-              the gap between security research and engineering, making security a first-class
-              concern from design to deployment.
+              I'm a <strong>security engineer</strong> with over{' '}
+              <strong>6 years of experience</strong> across offensive security and product
+              security from hands-on penetration testing to embedding security into the SDLC. I
+              can also <strong>build and run</strong> the things I secure: software, cloud, and
+              infrastructure.
             </p>
             <p>
-              On the <strong>product security</strong> side, I drive SSDLC adoption, conduct
-              threat modeling and security design reviews, enforce CI/CD pipeline hardening,
-              manage AWS security posture, and collaborate with engineering teams to build
-              secure-by-default systems. I translate security risks into actionable engineering
-              requirements.
-            </p>
-            <p>
-              On the <strong>offensive side</strong>, I specialize in end-to-end security
-              assessments across web applications, REST &amp; GraphQL APIs, mobile apps
-              (iOS/Android), and thick client desktop applications. To support this work, I build
-              open-source tooling {' '}<strong>InterceptSuite</strong>, <strong>PyCript</strong>,{' '}
-              <strong>ProxyBridge</strong>, and <strong>APTRS</strong> purpose-built to solve
-              real gaps in the pentesting workflow and adopted by security professionals worldwide.
+              In security I run end-to-end assessments across web apps, REST &amp; GraphQL APIs,
+              mobile (iOS/Android), and thick client apps, and drive threat modeling, secure
+              SDLC, and AWS security posture. That same range lets me build security tooling used
+              worldwide my commercial product <strong>InterceptSuite</strong>, plus open-source
+              projects like <strong>PyCript</strong>, <strong>ProxyBridge</strong>, and{' '}
+              <strong>APTRS</strong>.
             </p>
           </div>
 

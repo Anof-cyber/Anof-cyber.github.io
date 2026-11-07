@@ -50,7 +50,7 @@
 }
 .exp__tab--active .exp__tab-indicator {
   background: var(--accent);
-  box-shadow: 0 0 8px rgba(0, 212, 192, 0.5);
+  box-shadow: 0 0 8px rgba(163, 112, 74, 0.5);
 }
 
 .exp__tab-text {
@@ -96,7 +96,7 @@
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 2rem 2.25rem;
-  border-left: 2px solid rgba(0, 212, 192, 0.35);
+  border-left: 2px solid rgba(163, 112, 74, 0.35);
   animation: tab-fade-in 0.25s ease-out both;
 }
 
